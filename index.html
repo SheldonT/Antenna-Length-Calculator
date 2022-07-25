@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Antenna Length Calculator</title>
+    </head>
+        <h1>Sheldon's Antenna Length Calculator</h1>
+
+        <h3>1. What type of antenna do you want to build?</h3>
+
+        <input type="radio" id="dipole" name="antenna_type"> <label>Dipole</label>
+        <input type="radio" id="fan_dipole" name="antenna_type"> <label>Fan Dipole</label>
+        <input type="radio" id="inverted_vee" name="antenna_type"> <label>Inverted Vee</label>
+        <input type="radio" id="ocf_dipole" name="antenna_type"> <label>Off Center Fed Dipole (Carolina Windom)</label>
+        <input type="radio" id="vertical" name="antenna_type"> <label>Vertical</label>
+        <button type="button">Select Antenna</button>
+
+        <h3>2. What band will you be operating on?</h3>
+
+        <input list="ham_bands" name="bands">
+            <datalist id="ham_bands">
+                <option value="160m"></option>
+                <option value="80m"></option>
+                <option value="60m"></option>
+                <option value="40m"></option>
+                <option value="30m"></option>
+                <option value="20m"></option>
+                <option value="17m"></option>
+                <option value="15m"></option>
+                <option value="12m"></option>
+                <option value="11m (CB)"></option>
+                <option value="10m"></option>
+                <option value="6m"></option>
+                <option value="2m"></option>
+                <option value="70cm"></option>
+            </datalist>
+        <button type="button">Select Band</button>
+        <h3>3. Here's your antenna...</h3>
+    <body>
+
+    </body>
+</html>
