@@ -2,28 +2,51 @@ body {
     font-family: 'Roboto', sans-serif;
     padding-top: 20px;
     padding-bottom: 20px;
-    padding-left: 50px;
-    padding-right: 50px;
+    padding-left: 100px;
+    padding-right: 100px;
+    background-color: #889696;
 }
 
-h2 {
+h1 {
     text-align: center;
 }
 
 h3 {
-    text-align: left;}
-
-div.sections {
-    padding: 15px;
-    margin-bottom: 10px;
-    border-style: dashed;
-    border-width: 1px;
-    border-radius: 10px;
-    text-align: center;
+    text-align: left;
 }
 
-div.antenna_type {
-    display: inline-block;
+button {
+    margin: 20px;
+}
+
+.sections {
     padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    text-align: center;
+    background-color: #E0E2DB;
+}
+
+.antenna_type {
+    position: relative;
+    margin-left: 25px;
+    width: 200px;
+    height: 230px;
+    display: inline-block;
     text-align: left;
    }
+
+.antenna_img {
+    position: absolute;
+    left: 0px;
+}
+
+.antenna_control{
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+}
+
+.freq_input {
+    width: 50px;
+}

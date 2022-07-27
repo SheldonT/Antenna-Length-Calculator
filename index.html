@@ -12,56 +12,51 @@
 
     <body>
         
-        <h2>Sheldon's Antenna Length Calculator</h2>
+        <h1>Sheldon's Antenna Length Calculator</h1>
 
         <div class="sections">
         <h3>1. What type of antenna do you want to build?</h3>
             <div class="antenna_type">
-                <img src="dipole.png" alt="Dipole Antenna"></br>
-                <input type="radio" id="dipole" name="antenna_type"> <label>Dipole</label>
+                <img class="antenna_img" src="dipole.png" alt="Dipole Antenna">
+                <div class="antenna_control">
+                    <input type="radio" id="dipole" name="antenna_type"> <label>Dipole</label>
+                </div>
             </div>
             
             <div class="antenna_type">
-                <img src="fandipole.png" alt="Fan Dipole Antenna"></br>
-                <input type="radio" id="fan_dipole" name="antenna_type"> <label>Fan Dipole</label>
+                <img class="antenna_img" src="fandipole.png" alt="Fan Dipole Antenna">
+                <div class="antenna_control">
+                    <input type="radio" id="fan_dipole" name="antenna_type"> <label>Fan Dipole</label>
+                </div>
             </div>
 
             <div class="antenna_type">
-                <img src="invertedvee.png" alt="Inverted Vee Dipole Antenna"></br>
-                <input type="radio" id="inverted_vee" name="antenna_type"> <label>Inverted Vee</label>
+                <img class="antenna_img" src="invertedvee.png" alt="Inverted Vee Dipole Antenna">
+                <div class="antenna_control">
+                    <input type="radio" id="inverted_vee" name="antenna_type"> <label>Inverted Vee</label>
+                </div>
             </div>
 
             <div class="antenna_type">
-                <img src="dipole.png" alt="Dipole Antenna"></br>
-                <input type="radio" id="ocf_dipole" name="antenna_type"> <label>Off Center Fed Dipole</label>
+                <img class="antenna_img" src="ocf.png" alt="Off Center Fed Dipole">
+                <div class="antenna_control">
+                    <input type="radio" id="ocf_dipole" name="antenna_type"> <label>Off Center Fed Dipole</label>
+                </div>
             </div>
 
             <div class="antenna_type">
-                <img src="vertical.png" alt="Dipole Antenna"></br>
-                <input type="radio" id="vertical" name="antenna_type"> <label>Vertical</label>
-            </div></br>
-            <button type="button">Select Band</button>
+                <img class="antenna_img" src="vertical.png" alt="Vertical Antenna">
+                <div class="antenna_control">
+                    <input type="radio" id="vertical" name="antenna_type"> <label>Vertical</label>
+                </div>
+            </div>
+            </br>
+            <button type="button">Select Antenna</button>
         </div>
         
         <div class="sections">
-        <h3>2. What band will you be operating on?</h3>
-
-            <select id="ham_bands">
-                <option value="160">160m</option>
-                <option value="80">80m</option>
-                <option value="60">60m</option>
-                <option value="40">40m</option>
-                <option value="30">30m</option>
-                <option value="20">20m</option>
-                <option value="17">17m</option>
-                <option value="15">15m</option>
-                <option value="12">12m</option>
-                <option value="11">11m (CB)</option>
-                <option value="10">10m</option>
-                <option value="6">6m</option>
-                <option value="2">2m</option>
-                <option value="70">70cm</option>
-            </select>
+        <h3>2. What frequency will you be operating on?</h3>
+            <label for="freq">Frequency: </label><input class="freq_input" type="text" id="freq" name="freq"> <label for="freq">MHz</label> </br>
             <button type="button">Select Band</button>
         </div>
         <div class="sections">
