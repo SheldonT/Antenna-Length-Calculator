@@ -28,23 +28,14 @@ button {
 }
 
 .antenna_type {
-    position: relative;
+    display: inline-flex;
+    flex-direction: column;
     margin-left: 25px;
-    width: 200px;
-    height: 230px;
-    display: inline-block;
     text-align: left;
    }
 
 .antenna_img {
-    position: absolute;
-    left: 0px;
-}
-
-.antenna_control{
-    position: absolute;
-    left: 0px;
-    bottom: 0px;
+   margin-bottom: 10px;
 }
 
 .freq_input {
