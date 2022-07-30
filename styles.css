@@ -1,9 +1,9 @@
 body {
     font-family: 'Roboto', sans-serif;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    padding-left: 100px;
-    padding-right: 100px;
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+    padding-left: 6.25rem;
+    padding-right: 6.25rem;
     background-color: #889696;
 }
 
@@ -16,28 +16,28 @@ h3 {
 }
 
 button {
-    margin: 20px;
+    margin: 1.25rem;
 }
 
 .sections {
-    padding: 15px;
-    margin-bottom: 10px;
-    border-radius: 10px;
+    padding: 0.94rem;
+    margin-bottom: 0.63rem;
+    border-radius: 0.63rem;
     text-align: center;
     background-color: #E0E2DB;
 }
 
-.antenna_type {
+.antennaType {
     display: inline-flex;
     flex-direction: column;
-    margin-left: 25px;
+    margin-left: 1.56rem;
     text-align: left;
    }
 
-.antenna_img {
-   margin-bottom: 10px;
+.antennaImg {
+   margin-bottom: 0.63rem;
 }
 
-.freq_input {
-    width: 50px;
+.freqInput {
+    width: 3.13rem;
 }
