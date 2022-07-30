@@ -8,59 +8,106 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+        <script>
+
+            //classic "Hello World!"
+            console.log("Hello World!");
+
+            function printSelectedAntenna(target, str, rbutton){ 
+                let antennas = document.getElementsByName(rbutton);  //creating an array with radio button elements
+                let selectedAntenna = ""; //string to be written to target html element
+
+                for (let i=0; i < antennas.length; i++){ //step through each radio button element
+                    if ((antennas[i].type="radio") && (antennas[i].checked)){      
+                            selectedAntenna = str.concat(" ", antennas[i].value);  //build the string to be written to target html element
+                        }
+                    }
+
+                document.getElementById(target).innerHTML = selectedAntenna;  //write selectedAntenna string to target html element
+            }
+
+            function drawAntennaDiag(){
+                const canvas = document.getElementById("antennaDiagram");
+                
+                if(canvas.getContext){
+                    const ctx = canvas.getContext("2d");
+
+                    ctx.fillStyle = "#ed1f24";
+                    ctx.fillRect(10, 70, 130, 5);
+
+                    ctx.fillStyle = "#3b3d98";
+                    ctx.fillRect(160, 70, 130, 5);
+                }
+                else{}
+            }
+
+        </script>
     </head>
 
-    <body>
+    <body class="main">
         
-        <h1 class="">Antenna Length Calculator</h1>
+        <h1 class="title">Antenna Length Calculator</h1>
 
         <div class="sections">
-        <h3>1. What type of antenna do you want to build?</h3>
+        <h3 class="sectionHeaders">1. What type of antenna do you want to build?</h3>
             <div class="antennaType">
                 <img class="antennaImg" src="dipole.png" alt="Dipole Antenna">
+
                 <div>
-                    <input type="radio" id="dipole" name="antennaType"> <label>Dipole</label>
+                    <input type="radio" id="dipole" name="antennaType" value="Dipole" checked> <label for="dipole">Dipole</label>
                 </div>
             </div>
             
             <div class="antennaType">
                 <img class="antennaImg" src="fandipole.png" alt="Fan Dipole Antenna">
+
                 <div>
-                    <input type="radio" id="fan_dipole" name="antennaType"> <label>Fan Dipole</label>
+                    <input type="radio" id="fanDipole" name="antennaType" value="Fan Dipole"> <label for="fanDipole">Fan Dipole</label>
                 </div>
             </div>
 
             <div class="antennaType">
                 <img class="antennaImg" src="invertedvee.png" alt="Inverted Vee Dipole Antenna">
+
                 <div>
-                    <input type="radio" id="inverted_vee" name="antennaType"> <label>Inverted Vee</label>
+                    <input type="radio" id="invertedVee" name="antennaType" value="Inverted Vee"> <label for="invertedVee">Inverted Vee</label>
                 </div>
             </div>
 
             <div class="antennaType">
                 <img class="antennaImg" src="ocf.png" alt="Off Center Fed Dipole">
+
                 <div>
-                    <input type="radio" id="ocf_dipole" name="antennaType"> <label>Off Center Fed Dipole</label>
+                    <input type="radio" id="ocfDipole" name="antennaType" value="Off Center Fed Dipole"> <label for="ocfDipole">Off Center Fed Dipole</label>
                 </div>
             </div>
 
             <div class="antennaType">
                 <img class="antennaImg" src="vertical.png" alt="Vertical Antenna">
+
                 <div>
-                    <input type="radio" id="vertical" name="antennaType"> <label>Vertical</label>
+                    <input type="radio" id="vertical" name="antennaType" value="Vertical"> <label for="vertical">Vertical</label>
                 </div>
             </div>
-            </br>
-            <button type="button">Select Antenna</button>
         </div>
         
         <div class="sections">
-        <h3>2. What frequency will you be operating on?</h3>
+        <h3 class="sectionHeaders">2. What frequency will you be operating on?</h3>
             <label for="freq">Frequency: </label><input class="freqInput" type="text" id="freq" name="freq"> <span>MHz</span> </br>
-            <button type="button">Select Band</button>
+
+            <button class="calculate" onclick="document.getElementById('helloWorld').innerHTML = 'Hello World!';
+                printSelectedAntenna('antennaInfo', '3. Here\'s your antenna...', 'antennaType');drawAntennaDiag()" type="button">Calculate</button></br>
+            
+            <span id="helloWorld"></span>
+                
         </div>
+
         <div class="sections">
-        <h3>3. Here's your antenna...</h3>
+        <h3 id="antennaInfo" class="sectionHeaders">3. Here's your antenna...</h3>
+            
+            <canvas class="drawAntenna" id="antennaDiagram"></canvas>
         </div>
+
     </body>
 </html>
