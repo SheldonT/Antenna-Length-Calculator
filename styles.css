@@ -1,9 +1,9 @@
 .main {
     font-family: 'Roboto', sans-serif;
-    padding-top: 1.25rem;
+    padding-top: 0.2rem;
     padding-bottom: 1.25rem;
-    padding-left: 6.25rem;
-    padding-right: 6.25rem;
+    padding-left: 14rem;
+    padding-right: 14rem;
     background-color: #889696;
 }
 
@@ -16,7 +16,8 @@
 }
 
 .calculate {
-    margin: 1.25rem;
+    margin: 1.50rem;
+    width: 6.26rem;
 }
 
 .sections {
@@ -35,6 +36,11 @@
     text-align: left;
 }
 
+.frequencyField {
+    display: inline-flex;
+    flex-direction: column;
+}
+
 .drawAntenna{
     border-style: solid;
     border-width: 0.06rem;
@@ -46,4 +52,8 @@
 
 .freqInput {
     width: 3.13rem;
+}
+
+.helloWorld{
+    text-align: center;
 }
