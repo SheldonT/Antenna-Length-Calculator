@@ -54,6 +54,22 @@
     width: 3.13rem;
 }
 
+.singleFreq{
+    display: block;
+}
+
+.doubleFreq{
+    display: none;
+}
+
+.tripleFreq{
+    display: none;
+}
+
+
+
+
+
 .helloWorld{
     text-align: center;
 }
