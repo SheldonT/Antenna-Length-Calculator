@@ -50,6 +50,39 @@
                 else{}
             }
 
+            function freqOptions(ant){
+
+                switch (ant){
+                    case 1:{
+                        document.getElementById("singleFreq").style.display = "block";
+                        document.getElementById("doubleFreq").style.display = "none";
+                        document.getElementById("tripleFreq").style.display = "none";
+                        break;
+                    }
+
+                    case 2:{
+                        document.getElementById("singleFreq").style.display = "none";
+                        document.getElementById("doubleFreq").style.display = "block";
+                        document.getElementById("tripleFreq").style.display = "none";
+                        break;
+                    }
+                    
+                    case 3:{
+                        document.getElementById("singleFreq").style.display = "none";
+                        document.getElementById("doubleFreq").style.display = "none";
+                        document.getElementById("tripleFreq").style.display = "block";
+                        break;
+                    }
+                    default:{
+                        document.getElementById("singleFreq").style.display = "block";
+                        document.getElementById("doubleFreq").style.display = "none";
+                        document.getElementById("tripleFreq").style.display = "none";
+                    }
+                }
+            }
+
+
+
         </script>
     </head>
 
@@ -63,7 +96,7 @@
                 <img class="antennaImg" src="dipole.png" alt="Dipole Antenna">
 
                 <div>
-                    <input type="radio" id="dipole" name="antennaType" value="Dipole" checked> <label for="dipole">Dipole</label>
+                    <input type="radio" id="dipole" name="antennaType" value="Dipole" onclick="freqOptions(1)" checked> <label for="dipole">Dipole</label>
                 </div>
             </div>
             
@@ -71,7 +104,7 @@
                 <img class="antennaImg" src="fandipole.png" alt="Fan Dipole Antenna">
 
                 <div>
-                    <input type="radio" id="fanDipole" name="antennaType" value="Fan Dipole"> <label for="fanDipole">Fan Dipole</label>
+                    <input type="radio" id="fanDipole" name="antennaType" value="Fan Dipole" onclick="freqOptions(3)"> <label for="fanDipole">Fan Dipole</label>
                 </div>
             </div>
 
@@ -79,7 +112,7 @@
                 <img class="antennaImg" src="invertedvee.png" alt="Inverted Vee Dipole Antenna">
 
                 <div>
-                    <input type="radio" id="invertedVee" name="antennaType" value="Inverted Vee"> <label for="invertedVee">Inverted Vee</label>
+                    <input type="radio" id="invertedVee" name="antennaType" value="Inverted Vee" onclick="freqOptions(1)"> <label for="invertedVee">Inverted Vee</label>
                 </div>
             </div>
 
@@ -87,7 +120,7 @@
                 <img class="antennaImg" src="ocf.png" alt="Off Center Fed Dipole">
 
                 <div>
-                    <input type="radio" id="ocfDipole" name="antennaType" value="Off Center Fed Dipole"> <label for="ocfDipole">Off Center Fed Dipole</label>
+                    <input type="radio" id="ocfDipole" name="antennaType" value="Off Center Fed Dipole" onclick="freqOptions(2)"> <label for="ocfDipole">Off Center Fed Dipole</label>
                 </div>
             </div>
 
@@ -95,7 +128,7 @@
                 <img class="antennaImg" src="vertical.png" alt="Vertical Antenna">
 
                 <div>
-                    <input type="radio" id="vertical" name="antennaType" value="Vertical"> <label for="vertical">Vertical</label>
+                    <input type="radio" id="vertical" name="antennaType" value="Vertical" onclick="freqOptions(1)"> <label for="vertical">Vertical</label>
                 </div>
             </div>
         </div>
@@ -105,8 +138,22 @@
 
             <div class="frequencyField">
 
-                <div>
+                <div class="singleFreq" id="singleFreq">
                     <label for="freq">Frequency: </label> <input class="freqInput" type="text" id="freq" name="freq"> <span>MHz</span>
+                </div>
+
+                <div class="doubleFreq" id="doubleFreq">
+                    <label for="ocfFreq">Highest Desired Band: </label>
+                    <select name="ocfBands" id="ocfBands" id="ocfBands">
+                        <option value="40m"> 40m (7.000 MHz) </option>
+                        <option value="80m"> 80m (3.5 MHz) </option>
+                    </select>
+                </div>
+
+                <div class="tripleFreq" id="tripleFreq">
+                    <div> <label for="freq">Frequency for First: </label> <input class="freqInput" type="text" id="freq" name="freq"> <span>MHz</span> </div>
+                    <div> <label for="freq">Frequency for Second Leg: </label> <input class="freqInput" type="text" id="freq" name="freq"> <span>MHz</span> </div>
+                    <div> <label for="freq">Frequency for Third Leg: </label> <input class="freqInput" type="text" id="freq" name="freq"> <span>MHz</span> </div>
                 </div>
 
                 <button class="calculate" onclick="document.getElementById('helloWorld').innerHTML = 'Hello World!';
