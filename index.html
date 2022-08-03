@@ -34,18 +34,23 @@
                 if(canvas.getContext){
                     const ctx = canvas.getContext("2d");  //define canvase context
 
-                    ctx.clearRect(0, 0, ctx.width, ctx.height);  //clear anything previously drawn
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);  //clear anything previously drawn
 
                     ctx.beginPath();  //start a path
                     ctx.strokeStyle = "#FF2D00";   //draw a red line (always shows purple?)
                     ctx.moveTo(10, 100);
                     ctx.lineTo(290, 100);
                     ctx.stroke();
-
+                    ctx.closePath();
+                   
+                    
+                    ctx.beginPath();
                     ctx.strokeStyle = "#3B3D98";  //draw a blue line
                     ctx.moveTo(310, 100);
                     ctx.lineTo(590, 100);
-                    ctx.stroke();  //end current path
+                    ctx.stroke();
+                    ctx.closePath();
+                    
                 }
                 else{}
             }
