@@ -3,7 +3,7 @@ console.log("Hello World!");
 
 
 const graphicArea = document.getElementById("antennaDiagram");
-var graphicAreaCTX = graphicAreaCtx = graphicArea.getContext("2d");
+var graphicAreaCTX = graphicArea.getContext("2d");
 
 //path for graphics drawn in canvas
 
@@ -32,8 +32,8 @@ function antennaLengthCalc(){
         const ant = Array.from(document.getElementsByName("antennaType"));  //converting antenna radio button to Array() object
         const antenna = ant.find(isChecked).value;  //using find() and callback function isChecked to find the checked radio button.
 
-        graphicAreaCtx.lineCap = "round";  //make the antenna tips round
-        graphicAreaCtx.lineWidth = "5";  //make the antenna elements 5 px thick.
+        graphicAreaCTX.lineCap = "round";  //make the antenna tips round
+        graphicAreaCTX.lineWidth = "5";  //make the antenna elements 5 px thick.
 
         graphicAreaCTX.font = "16px Roboto"; //default font to use for canvas
 
@@ -58,10 +58,11 @@ function antennaLengthCalc(){
 
                     graphicAreaCTX.textBaseLine = "bottom";  //position measurement text
                     graphicAreaCTX.textAlign="center";
-                    graphicAreaCTX.fillText(length + " m", (graphicArea.width / 4) + 10, (graphicArea.height / 2) - 10);  //write measurement on canvas for each antenna leg
+                    graphicAreaCTX.fillText(length + " m", (graphicArea.width / 4) + 10, 115);  //write measurement on canvas for each antenna leg
                     graphicAreaCTX.textAlign="center";
-                    graphicAreaCTX.fillText(length + " m", (graphicArea.width * (3/4)) - 10, (graphicArea.height / 2) - 10);
+                    graphicAreaCTX.fillText(length + " m", (graphicArea.width * (3/4)) - 10, 115);
 
+                    drawScaleObj(length);
                 }
                 
                 break;
@@ -72,6 +73,10 @@ function antennaLengthCalc(){
                 const freq1 = document.getElementById("fan1").value; //get three frequencies from input fields
                 const freq2 = document.getElementById("fan2").value;
                 const freq3 = document.getElementById("fan3").value;
+
+                let length1 = 0;
+                let length2 = 0;
+                let length3 = 0;
 
                 //drawAntenna(antenna, fanDipoleRed, fanDipoleBlue);
 
@@ -86,7 +91,7 @@ function antennaLengthCalc(){
 
                         console.log( antenna + " leg 1 for " + freq1 + " Mhz");
 
-                        const length1 = (71.5 / freq1).toFixed(3);
+                        length1 = (71.5 / freq1).toFixed(3);
 
                         graphicAreaCTX.textBaseLine = "bottom";
                         graphicAreaCTX.textAlign="left";
@@ -101,7 +106,7 @@ function antennaLengthCalc(){
 
                         console.log( antenna + " leg 2 for " + freq2 + " Mhz");
 
-                        const length2 = (71.5 / freq2).toFixed(3);
+                        length2 = (71.5 / freq2).toFixed(3);
 
                         graphicAreaCTX.textBaseLine = "middle";
                         graphicAreaCTX.textAlign="right";
@@ -116,7 +121,7 @@ function antennaLengthCalc(){
 
                         console.log( antenna + " leg 3 for " + freq3 + " Mhz");
 
-                        const length3 = (71.5 / freq3).toFixed(3);
+                        length3 = (71.5 / freq3).toFixed(3);
 
                         graphicAreaCTX.textBaseLine = "middle";
                         graphicAreaCTX.textAlign="right";
@@ -125,7 +130,10 @@ function antennaLengthCalc(){
                         graphicAreaCTX.textBaseLine = "middle";
                         graphicAreaCTX.textAlign="left";
                         graphicAreaCTX.fillText(length3 + " m", 570, 40);
+
                     }
+                    
+                    if ((freq1.length != 0) && (freq2.length != 0) && (freq3.length != 0)) drawScaleObj(length2);
 
                 break;
             }
@@ -149,8 +157,10 @@ function antennaLengthCalc(){
                     graphicAreaCTX.fillText(length + " m", (graphicArea.width / 4) + 10, (graphicArea.height / 2) - 10);
                     graphicAreaCTX.textAlign="left";
                     graphicAreaCTX.fillText(length + " m", (graphicArea.width * (3/4)) - 10, (graphicArea.height / 2) - 10);
+
+                    drawScaleObj(length);
                 }
-                
+
                 break;
             }
 
@@ -178,6 +188,8 @@ function antennaLengthCalc(){
                 graphicAreaCTX.textAlign="center";
                 graphicAreaCTX.fillText(length2 + " m", 700, (graphicArea.height / 2) - 10);
 
+                drawScaleObj(length1); //use larger leg to draw scale image
+
                 break;
             }
             
@@ -201,6 +213,8 @@ function antennaLengthCalc(){
                     graphicAreaCTX.textAlign="right";
                     graphicAreaCTX.fillText(length + " m", 280, 200);
 
+                    drawScaleObj(length);
+
                 }
 
                 break;
@@ -215,7 +229,9 @@ function antennaLengthCalc(){
 
 function drawAntenna(name, red, blue){ //draw the antenna diagram based on predetermined global Path2D() objects.
 
-    graphicAreaCtx.clearRect(0, 0, graphicArea.width, graphicArea.height); //clear the canvas before drawing an antenna
+    graphicAreaCTX.globalAlpha = 1;
+
+    graphicAreaCTX.clearRect(0, 0, graphicArea.width, graphicArea.height); //clear the canvas before drawing an antenna
 
     graphicAreaCTX.textAlign="center";  //position and write the name of the selected antenna (name)
     graphicAreaCTX.textBaseLine = "top";
@@ -233,21 +249,73 @@ function drawAntenna(name, red, blue){ //draw the antenna diagram based on prede
     graphicAreaCTX.closePath();
 }
 
+function drawScaleObj(antennaLength) {
+
+    const car = new Image();
+    const hand = new Image();
+    const armsOut = new Image();
+    const chair = new Image();
+    const coin = new Image();
+
+    car.src = "car.svg";
+    hand.src = "hand.svg";
+    armsOut.src = "armSpan.svg";
+    chair.src = "chair.svg";
+    coin.src = "coin.svg";
+
+    scale = 380 / antennaLength;  //pixels per meter determined by the given calculated antenna length
+
+    // car = 4.8m (0.5 w/h)
+    // person = 1.7m (0.5 h/w)
+    // armsOut = 1.7 (1.002 h/w)
+    // hand = 0.2m (1.35 h/w)
+    // chair =  0.5m (1.68 h/w)
+    // coin = 0.024m
+
+    graphicAreaCTX.globalAlpha = 0.3; //make the scale object opaque
+
+    if (antennaLength >= 5){  //use a car as a scale object if the antenna is more than 5m long
+
+        width = scale * 4.8;  //determine how many pixels the car length will be
+        car.addEventListener('load', (e) => {graphicAreaCTX.drawImage(car, 400 - (width / 2), graphicArea.height - (width * 0.5) - 25, width, width * 0.5)} );
+    }
+
+    if ((antennaLength >= 2.9) &&  (antennaLength < 5)){ //use a person as the scale object if antenna is between 5 and 2.9m
+
+        width = scale * 1.7;
+        armsOut.addEventListener('load', (e) => {graphicAreaCTX.drawImage(armsOut, 400 - (width / 2), graphicArea.height - (width * 1.002) - 25, width, width * 1.002)} );
+    }
+
+    if ((antennaLength >= 1.4) &&  (antennaLength < 2.9)){ //use a chair as a scale object if antenna length is 1.4 and 2.9m
+
+        width = scale * 0.5;
+        chair.addEventListener('load', (e) => {graphicAreaCTX.drawImage(chair, 400 - (width / 2), graphicArea.height - (width * 1.68) - 25, width, width * 1.68)} );
+    }
+
+    if ((antennaLength >= 0.45 ) && (antennaLength < 1.4)){  //use a hand as a scale object if the antenna is 1.4 to 0.45m
+
+        width = scale * 0.2;
+        hand.addEventListener('load', (e) => {graphicAreaCTX.drawImage(hand, 400 - (width / 2), graphicArea.height - (width * 1.35) - 25, width, width * 1.35)} );
+        
+    }
+
+    if (antennaLength < 0.45) {  //use an american quarter as a scale object if antenna is less than 0.45m
+
+        graphicAreaCTX.globalAlpha = 0.4; //coin graphic has less detail and needs to be less opaque
+
+        width = scale * 0.024;
+        coin.addEventListener('load', (e) => {graphicAreaCTX.drawImage(coin, 400 - (width / 2), (graphicArea.height / 2) - width / 2, width, width)} );
+        
+    }
+
+}
+
+
 function freqOptions(){  //disabled/enable input fields based on the type of antenna selected.
 
     const ant = Array.from(document.getElementsByName("antennaType"));  //converting antenna radio button to Array() object
 
     const antType = ant.find(isChecked).value;  //find which radio button is checked
-
-
-/*    document.getElementById("singleFreq").style.display = "block";
-    document.getElementById("singleFreq").removeAttribute("disabled", "");
-
-    document.getElementById("doubleFreq").style.display = "none";
-    document.getElementById("doubleFreq").setAttribute("disabled", "");
-
-    document.getElementById("tripleFreq").style.display = "none";
-    document.getElementById("tripleFreq").setAttribute("disabled", "");*/
 
     switch (antType){  //change the frequency input fields depending on which antenna is selected.
 
