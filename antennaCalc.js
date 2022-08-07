@@ -74,15 +74,18 @@ function antennaLengthCalc(){
                 const freq2 = document.getElementById("fan2").value;
                 const freq3 = document.getElementById("fan3").value;
 
-                let length1 = 0;
-                let length2 = 0;
-                let length3 = 0;
+                let length = [0, 0, 0];
 
-                //drawAntenna(antenna, fanDipoleRed, fanDipoleBlue);
+                //calculate the length of each antenna leg and assign them to the length array
+                length = [(71.5 / freq1).toFixed(3), (71.5 / freq2).toFixed(3), (71.5 / freq3).toFixed(3)];
 
                 if((freq1.length != 0) && (freq2.length != 0) && (freq3.length != 0)) {
                     //update diagram title with frequencies when all three are entered.
                     drawAntenna(antenna + " for " + freq1 + " MHz, " + freq2 + "MHz, and " + freq3 + " MHz", fanDipoleRed, fanDipoleBlue);
+
+                    //sort the antenna lengths from longest to shortest
+                    length.sort(function(a, b) {return b - a});
+
                 }else{
                     drawAntenna(antenna, fanDipoleRed, fanDipoleBlue);
                 }
@@ -91,49 +94,44 @@ function antennaLengthCalc(){
 
                         console.log( antenna + " leg 1 for " + freq1 + " Mhz");
 
-                        length1 = (71.5 / freq1).toFixed(3);
-
                         graphicAreaCTX.textBaseLine = "bottom";
                         graphicAreaCTX.textAlign="left";
-                        graphicAreaCTX.fillText(length1 + " m", 20, 210);
+                        graphicAreaCTX.fillText(length[0] + " m", 20, 210);
 
                         graphicAreaCTX.textBaseLine = "bottom";
                         graphicAreaCTX.textAlign="right";
-                        graphicAreaCTX.fillText(length1 + " m", 780, 210);
+                        graphicAreaCTX.fillText(length[0] + " m", 780, 210);
                     }
 
                     if (freq2.length != 0) {
 
                         console.log( antenna + " leg 2 for " + freq2 + " Mhz");
 
-                        length2 = (71.5 / freq2).toFixed(3);
-
                         graphicAreaCTX.textBaseLine = "middle";
                         graphicAreaCTX.textAlign="right";
-                        graphicAreaCTX.fillText(length2 + " m", 110, 125);
+                        graphicAreaCTX.fillText(length[1] + " m", 110, 125);
 
                         graphicAreaCTX.textBaseLine = "middle";
                         graphicAreaCTX.textAlign="left";
-                        graphicAreaCTX.fillText(length2 + " m", 690, 125);
+                        graphicAreaCTX.fillText(length[1] + " m", 690, 125);
                     }
 
                     if (freq3.length != 0) {
 
                         console.log( antenna + " leg 3 for " + freq3 + " Mhz");
 
-                        length3 = (71.5 / freq3).toFixed(3);
-
                         graphicAreaCTX.textBaseLine = "middle";
                         graphicAreaCTX.textAlign="right";
-                        graphicAreaCTX.fillText(length3 + " m", 230, 40);
+                        graphicAreaCTX.fillText(length[2] + " m", 230, 40);
 
                         graphicAreaCTX.textBaseLine = "middle";
                         graphicAreaCTX.textAlign="left";
-                        graphicAreaCTX.fillText(length3 + " m", 570, 40);
+                        graphicAreaCTX.fillText(length[2] + " m", 570, 40);
 
                     }
                     
-                    if ((freq1.length != 0) && (freq2.length != 0) && (freq3.length != 0)) drawScaleObj(length2);
+                    //draw the scale object according to the length of the longest leg
+                    if ((freq1.length != 0) && (freq2.length != 0) && (freq3.length != 0)) drawScaleObj(length[0]);
 
                 break;
             }
@@ -251,57 +249,67 @@ function drawAntenna(name, red, blue){ //draw the antenna diagram based on prede
 
 function drawScaleObj(antennaLength) {
 
+    const bus = new Image();
     const car = new Image();
     const hand = new Image();
-    const armsOut = new Image();
+    const armSpan = new Image();
     const chair = new Image();
     const coin = new Image();
 
+    bus.src = "schoolBus.svg";
     car.src = "car.svg";
     hand.src = "hand.svg";
-    armsOut.src = "armSpan.svg";
+    armSpan.src = "armSpan.svg";
     chair.src = "chair.svg";
     coin.src = "coin.svg";
 
-    scale = 380 / antennaLength;  //pixels per meter determined by the given calculated antenna length
+    //average real world width of each scale object in meters and image scale factor (w/h or h/w)
 
-    // car = 4.8m (0.5 w/h)
-    // person = 1.7m (0.5 h/w)
-    // armsOut = 1.7 (1.002 h/w)
-    // hand = 0.2m (1.35 h/w)
-    // chair =  0.5m (1.68 h/w)
-    // coin = 0.024m
+    const busWidth = 35; const busScale = 0.5;
+    const carWidth = 4.8; const carScale = 0.5;
+    const armSpanWidth = 1.7; const armSpanScale = 0.97;
+    const handWidth = 0.1; const handScale = 1.35;
+    const chairWidth = 0.5; const chairScale = 1.68;
+    const coinDiam = 0.024;
+
+    scale = 380 / antennaLength;  //pixels per meter determined by the given calculated antenna length
 
     graphicAreaCTX.globalAlpha = 0.3; //make the scale object opaque
 
-    if (antennaLength >= 5){  //use a car as a scale object if the antenna is more than 5m long
+    if (antennaLength >= 25) {
 
-        width = scale * 4.8;  //determine how many pixels the car length will be
-        car.addEventListener('load', (e) => {graphicAreaCTX.drawImage(car, 400 - (width / 2), graphicArea.height - (width * 0.5) - 25, width, width * 0.5)} );
+        width = scale * busWidth;
+        bus.addEventListener('load', (e) => {graphicAreaCTX.drawImage(bus, 400 - (width / 2), graphicArea.height - (width * busScale) - 25, width, width * busScale)} );
+
+    }
+
+    if ((antennaLength >= 5) && (antennaLength < 25)){  //use a car as a scale object if the antenna is more than 5m long
+
+        width = scale * carWidth;  //determine how many pixels the car length will be
+        car.addEventListener('load', (e) => {graphicAreaCTX.drawImage(car, 400 - (width / 2), graphicArea.height - (width * carScale) - 25, width, width * carScale)} );
     }
 
     if ((antennaLength >= 2.9) &&  (antennaLength < 5)){ //use a person as the scale object if antenna is between 5 and 2.9m
 
-        width = scale * 1.7;
-        armsOut.addEventListener('load', (e) => {graphicAreaCTX.drawImage(armsOut, 400 - (width / 2), graphicArea.height - (width * 1.002) - 25, width, width * 1.002)} );
+        width = scale * armSpanWidth;
+        armSpan.addEventListener('load', (e) => {graphicAreaCTX.drawImage(armSpan, 400 - (width / 2), graphicArea.height - (width * armSpanScale) - 25, width, width * armSpanScale)} );
     }
 
     if ((antennaLength >= 1.4) &&  (antennaLength < 2.9)){ //use a chair as a scale object if antenna length is 1.4 and 2.9m
 
-        width = scale * 0.5;
-        chair.addEventListener('load', (e) => {graphicAreaCTX.drawImage(chair, 400 - (width / 2), graphicArea.height - (width * 1.68) - 25, width, width * 1.68)} );
+        width = scale * chairWidth;
+        chair.addEventListener('load', (e) => {graphicAreaCTX.drawImage(chair, 400 - (width / 2), graphicArea.height - (width * chairScale) - 25, width, width * chairScale)} );
     }
 
-    if ((antennaLength >= 0.45 ) && (antennaLength < 1.4)){  //use a hand as a scale object if the antenna is 1.4 to 0.45m
+    if ((antennaLength >= 0.27) && (antennaLength < 1.4)){  //use a hand as a scale object if the antenna is 1.4 to 0.45m
 
-        width = scale * 0.2;
-        hand.addEventListener('load', (e) => {graphicAreaCTX.drawImage(hand, 400 - (width / 2), graphicArea.height - (width * 1.35) - 25, width, width * 1.35)} );
+        width = scale * handWidth;
+
+        hand.addEventListener('load', (e) => {graphicAreaCTX.drawImage(hand, 400 - (width / 2), graphicArea.height - (width * handScale) - 25, width, width * handScale)} );
         
     }
 
-    if (antennaLength < 0.45) {  //use an american quarter as a scale object if antenna is less than 0.45m
-
-        graphicAreaCTX.globalAlpha = 0.4; //coin graphic has less detail and needs to be less opaque
+    if (antennaLength < 0.27) {  //use an american quarter as a scale object if antenna is less than 0.45m
 
         width = scale * 0.024;
         coin.addEventListener('load', (e) => {graphicAreaCTX.drawImage(coin, 400 - (width / 2), (graphicArea.height / 2) - width / 2, width, width)} );
