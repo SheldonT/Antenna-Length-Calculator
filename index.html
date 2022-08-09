@@ -85,6 +85,10 @@
                         <label for="freq">Frequency for Third Leg: </label> <input class="freqInput" type="text" id="fan3" name="fan3" oninput="antennaLengthCalc()"> <span>MHz</span>
                     </div>
                 </div>
+                <div>
+                    <label for="meters">Meters</label><input type="radio" id="meters" name="units" value="meters" onclick="antennaLengthCalc()" checked>
+                    <label for="meters">Feet</label><input type="radio" id="feet" name="units" value="feet" onclick="antennaLengthCalc()" >
+                </div>
             </div>
 
         </div>
