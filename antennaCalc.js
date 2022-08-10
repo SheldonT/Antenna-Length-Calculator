@@ -3,7 +3,7 @@ console.log("Hello World!");
 
 
 const graphicArea = document.getElementById("antennaDiagram");
-var graphicAreaCTX = graphicArea.getContext("2d");
+let graphicAreaCTX = graphicArea.getContext("2d");
 
 //path for graphics drawn in canvas
 
@@ -23,9 +23,6 @@ var graphicAreaCTX = graphicArea.getContext("2d");
     const verticalRed = new Path2D('M400 40 L400 180');
     const groundBlue = new Path2D('M400 190 L400 240 M400 190 L200 240 M400 190 L600 240');
 
-function isChecked(ant){   //callback function for finding the selected antenna (radio button)
-    return ant.checked === true;  
-}
 
 function onlyNumbers(textField){
     const input = document.getElementById(textField).value.replace(/[^\d.]/g, ""); //remove any characters that are not numbers or "." from the input text
@@ -62,7 +59,8 @@ function unitName(){ //return the suffix for the selected unit of measurement
 function antennaLengthCalc(){
 
     const ant = Array.from(document.getElementsByName("antennaType"));  //converting antenna radio button to Array() object
-     const antenna = ant.find(isChecked).value;  //using find() and callback function isChecked to find the checked radio button.
+     const antenna = ant.find((ant) => ant.checked).value;  //using find() to find the checked radio button.
+                                                            //annonymous function (arg) => return value. Gives value of checked radio button
 
     graphicAreaCTX.lineCap = "round";  //make the antenna tips round
     graphicAreaCTX.lineWidth = "5";  //make the antenna elements 5 px thick.
@@ -79,7 +77,7 @@ function antennaLengthCalc(){
 
             drawAntenna(antenna, dipoleRed, dipoleBlue); //draw initial diagram of the antenna
 
-            if (freq.length != 0) {  //calculate antenna length and draw the antenna graphic in canvas
+            if (freq.length !== 0) {  //calculate antenna length and draw the antenna graphic in canvas
                                          //if the input field is not empty
                 console.log( antenna + " for " + freq + " Mhz");
 
@@ -112,7 +110,7 @@ function antennaLengthCalc(){
             //calculate the length of each antenna leg and assign them to the length array
             length = [unitSelect(freq1), unitSelect(freq2), unitSelect(freq3)];
 
-            if((freq1.length != 0) && (freq2.length != 0) && (freq3.length != 0)) {
+            if((freq1.length !== 0) && (freq2.length !== 0) && (freq3.length !== 0)) {
                     
                 //sort the antenna lengths from longest to shortest
                 length.sort(function(a, b) {return b - a});
@@ -124,7 +122,7 @@ function antennaLengthCalc(){
                 drawAntenna(antenna, fanDipoleRed, fanDipoleBlue);
             }
 
-                if (freq1.length != 0) { //update the diagram with each measurement as they're entered
+                if (freq1.length !== 0) { //update the diagram with each measurement as they're entered
 
                     console.log( antenna + " leg 1 for " + freq1 + " Mhz");
 
@@ -137,7 +135,7 @@ function antennaLengthCalc(){
                     graphicAreaCTX.fillText(length[0] + unitName(), 780, 210);
                 }
 
-                if (freq2.length != 0) {
+                if (freq2.length !== 0) {
 
                     console.log( antenna + " leg 2 for " + freq2 + " Mhz");
 
@@ -150,7 +148,7 @@ function antennaLengthCalc(){
                     graphicAreaCTX.fillText(length[1] + unitName(), 690, 125);
                 }
 
-                if (freq3.length != 0) {
+                if (freq3.length !== 0) {
 
                     console.log( antenna + " leg 3 for " + freq3 + " Mhz");
 
@@ -165,7 +163,7 @@ function antennaLengthCalc(){
                 }
                     
                 //draw the scale object according to the length of the longest leg
-                if ((freq1.length != 0) && (freq2.length != 0) && (freq3.length != 0)) {
+                if ((freq1.length !== 0) && (freq2.length !== 0) && (freq3.length !== 0)) {
 
                     let freq = [freq1, freq2, freq3];
 
@@ -208,13 +206,13 @@ function antennaLengthCalc(){
                 
             drawAntenna(antenna + " for " + band + " MHz", ocfRed, ocfBlue);
 
-            if (band == "40m"){
+            if (band === "40m"){
                 console.log( antenna + " for " + band + " and below");
                 length1 = 2 * unitSelect(7.1) * 0.64;
                 length2 = 2 * unitSelect(7.1) * 0.36;
             }
 
-            if (band == "80m"){
+            if (band === "80m"){
                 console.log( antenna + " for " + band + " and below");
                 length1 = 2 * unitSelect(3.6) * 0.64;
                 length2 = 2 * unitSelect(3.6) * 0.36;
@@ -226,8 +224,8 @@ function antennaLengthCalc(){
             graphicAreaCTX.textAlign="center";
             graphicAreaCTX.fillText(length2.toFixed(3) + unitName(), 700, (graphicArea.height / 2) - 10);
 
-            if(band == "40m") drawScaleObj(143 / 7.1 * 0.64); //use larger leg to draw scale image
-            if(band == "80m") drawScaleObj(143 / 3.6 * 0.64);
+            if(band === "40m") drawScaleObj(143 / 7.1 * 0.64); //use larger leg to draw scale image
+            if(band === "80m") drawScaleObj(143 / 3.6 * 0.64);
 
             break;
         }
@@ -238,7 +236,7 @@ function antennaLengthCalc(){
 
             drawAntenna(antenna, verticalRed, groundBlue);
 
-            if (freq.length != 0) {  //calculate antenna length and draw the antenna graphic in canvas
+            if (freq.length !== 0) {  //calculate antenna length and draw the antenna graphic in canvas
                                      //if the input field is not empty
 
                 console.log( antenna + " for " + freq + " Mhz");
@@ -297,12 +295,12 @@ function drawScaleObj(antennaLength) {
     const chair = new Image();
     const coin = new Image();
 
-    bus.src = "schoolBus.svg";
-    car.src = "car.svg";
-    hand.src = "hand.svg";
-    armSpan.src = "armSpan.svg";
-    chair.src = "chair.svg";
-    coin.src = "coin.svg";
+    bus.src = "./assets/schoolBus.svg";
+    car.src = "./assets/car.svg";
+    hand.src = "./assets/hand.svg";
+    armSpan.src = "./assets/armSpan.svg";
+    chair.src = "./assets/chair.svg";
+    coin.src = "./assets/coin.svg";
 
     //average real world width of each scale object in meters and image scale factor (w/h or h/w)
 
@@ -362,7 +360,7 @@ function freqOptions(){  //disabled/enable input fields based on the type of ant
 
     const ant = Array.from(document.getElementsByName("antennaType"));  //converting antenna radio button to Array() object
 
-    const antType = ant.find(isChecked).value;  //find which radio button is checked
+    const antType = ant.find((ant) => ant.checked).value;  //find which radio button is checked
 
     switch (antType){  //change the frequency input fields depending on which antenna is selected.
 
