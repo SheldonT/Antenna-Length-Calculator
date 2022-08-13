@@ -17,8 +17,8 @@ let graphicAreaCTX = graphicArea.getContext("2d");
     const invertedVeeRed = new Path2D('M10 240 L390 40');
     const invertedVeeBlue = new Path2D('M410 40 L790 240');
 //ocf dipole
-    const ocfRed = new Path2D('M10 125 L590 125');
-    const ocfBlue = new Path2D('M610 125 L790 125');
+    const ocfRed = new Path2D('M10 125 L500 125');
+    const ocfBlue = new Path2D('M520 125 L790 125');
 //vertical
     const verticalRed = new Path2D('M400 40 L400 180');
     const groundBlue = new Path2D('M400 190 L400 240 M400 190 L200 240 M400 190 L600 240');
@@ -59,15 +59,31 @@ function unitName(){ //return the suffix for the selected unit of measurement
 function antennaLengthCalc(){
 
     const ant = Array.from(document.getElementsByName("antennaType"));  //converting antenna radio button to Array() object
-     const antenna = ant.find((ant) => ant.checked).value;  //using find() to find the checked radio button.
-                                                            //annonymous function (arg) => return value. Gives value of checked radio button
+                                                            
+    const select = ant.find((ant) => ant.checked);  //using find() to find the checked radio button.
+                                                    //annonymous function (arg) => return value. Gives value of checked radio button
+    let antenna;
 
     graphicAreaCTX.lineCap = "round";  //make the antenna tips round
     graphicAreaCTX.lineWidth = "5";  //make the antenna elements 5 px thick.
 
     graphicAreaCTX.font = "16px Roboto"; //default font to use for canvas
 
-    freqOptions();
+    if (select){                                                //if an antenna has been selected, assign selected antenna type to 'antenna'
+        antenna = ant.find((ant) => ant.checked).value;         //and draw the selected antenna diagram in the canvas
+        freqOptions(select);
+    } else {                     
+        //Write a message in the canvas if a frequency is entered before an antenna is selected
+        
+        graphicAreaCTX.clearRect(0, 0, graphicArea.width, graphicArea.height); //clear the previous message from the canvas, if the user is insistant on entering a 
+                                                                               //frequency before selecting an antenna
+
+        graphicAreaCTX.textBaseLine = "middle";                 
+        graphicAreaCTX.textAlign = "center";
+        graphicAreaCTX.fillText("Please Select and Antenna Type", graphicArea.width / 2, graphicArea.height / 2);
+    }
+
+    //freqOptions();
 
     switch(antenna){
 
@@ -193,7 +209,7 @@ function antennaLengthCalc(){
                 graphicAreaCTX.fillText(length + unitName(), (graphicArea.width / 4) + 10, (graphicArea.height / 2) - 10);
                 graphicAreaCTX.textAlign="left";
                 graphicAreaCTX.fillText(length + unitName(), (graphicArea.width * (3/4)) - 10, (graphicArea.height / 2) - 10);
-
+                
                 drawScaleObj(71.5 / freq);
             }
 
@@ -220,9 +236,9 @@ function antennaLengthCalc(){
 
             graphicAreaCTX.textBaseLine = "bottom";
             graphicAreaCTX.textAlign="center";
-            graphicAreaCTX.fillText(length1.toFixed(3) + unitName(), 300, (graphicArea.height / 2) - 10);
+            graphicAreaCTX.fillText(length1.toFixed(3) + unitName(), 255, (graphicArea.height / 2) - 10);
             graphicAreaCTX.textAlign="center";
-            graphicAreaCTX.fillText(length2.toFixed(3) + unitName(), 700, (graphicArea.height / 2) - 10);
+            graphicAreaCTX.fillText(length2.toFixed(3) + unitName(), 655, (graphicArea.height / 2) - 10);
 
             if(band === "40m") drawScaleObj(143 / 7.1 * 0.64); //use larger leg to draw scale image
             if(band === "80m") drawScaleObj(143 / 3.6 * 0.64);
@@ -356,11 +372,9 @@ function drawScaleObj(antennaLength) {
     }
 }
 
-function freqOptions(){  //disabled/enable input fields based on the type of antenna selected.
+function freqOptions(selected){  //disabled/enable input fields based on the type of antenna selected.
 
-    const ant = Array.from(document.getElementsByName("antennaType"));  //converting antenna radio button to Array() object
-
-    const antType = ant.find((ant) => ant.checked).value;  //find which radio button is checked
+    const antType = selected.value;
 
     switch (antType){  //change the frequency input fields depending on which antenna is selected.
 
