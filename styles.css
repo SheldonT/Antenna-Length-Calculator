@@ -5,13 +5,14 @@ html{
 .main {
     font-family: 'Roboto', sans-serif;
     font-size: 1.6rem;
-    max-width: 130rem;
+    max-width: 120rem;
     margin: auto;
     background-color: #889696;
 }
 
 .title {
-    text-align: center;
+    height: 10rem;
+    width: auto;
 }
 
 .sectionHeaders {
