@@ -63,7 +63,7 @@
             <div class="frequencyField">
 
                 <div class="singleFreq" id="singleFreq">
-                    <label for="freq">Frequency: </label> <input class="freqInput" type="text" id="mono" name="mono" oninput="antennaLengthCalc()"> <span>MHz</span>
+                    <label for="freq">Frequency: </label> <input type="number" step="0.01" class="freqInput" type="text" min="0" id="mono" name="mono" oninput="antennaLengthCalc()"> <span>MHz</span>
                 </div>
 
                 <div class="doubleFreq" id="doubleFreq">
@@ -76,13 +76,13 @@
 
                 <div class="tripleFreq" id="tripleFreq">
                     <div>
-                        <label for="freq">Frequency for First Leg: </label> <input class="freqInput" type="text" id="fan1" name="fan1" oninput="antennaLengthCalc()"> <span>MHz</span>
+                        <label for="freq">Frequency for First Leg: </label> <input type="number" min="0" step="0.01" class="freqInput" type="text" id="fan1" name="fan1" oninput="antennaLengthCalc()"> <span>MHz</span>
                     </div>
                     <div>
-                        <label for="freq">Frequency for Second Leg: </label> <input class="freqInput" type="text" id="fan2" name="fan2" oninput="antennaLengthCalc()"> <span>MHz</span>
+                        <label for="freq">Frequency for Second Leg: </label> <input type="number" min="0" step="0.01" class="freqInput" type="text" id="fan2" name="fan2" oninput="antennaLengthCalc()"> <span>MHz</span>
                     </div>
                     <div>
-                        <label for="freq">Frequency for Third Leg: </label> <input class="freqInput" type="text" id="fan3" name="fan3" oninput="antennaLengthCalc()"> <span>MHz</span>
+                        <label for="freq">Frequency for Third Leg: </label> <input type="number" min="0" step="0.01"  class="freqInput" type="text" id="fan3" name="fan3" oninput="antennaLengthCalc()"> <span>MHz</span>
                     </div>
                 </div>
                 <div>

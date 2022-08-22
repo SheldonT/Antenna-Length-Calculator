@@ -33,27 +33,13 @@ function onlyNumbers(textField){
 }
 
 function unitSelect(input){
-    let length;
 
-    if (document.getElementById("meters").checked){
-        length = (71.5 / input).toFixed(3);
-    } else {
-        length = (234 / input).toFixed(2);
-    }
-
-    return length;
+    return (document.getElementById("meters").checked ? length = (71.5 / input).toFixed(3) : length = (234 / input).toFixed(2));  //use ternary refactor to check for selected units
 }
 
 function unitName(){ //return the suffix for the selected unit of measurement
-    let unit;
 
-    if (document.getElementById("meters").checked){
-        unit = " m";
-    } else {
-        unit = " ft";
-    }
-
-    return unit;
+    return (document.getElementById("meters").checked ?  unit = " m" :  unit = " ft");  //use ternary refactor to write the appropriate unit.
 }
 
 function antennaLengthCalc(){
@@ -71,7 +57,7 @@ function antennaLengthCalc(){
 
     if (select){                                                //if an antenna has been selected, assign selected antenna type to 'antenna'
         antenna = ant.find((ant) => ant.checked).value;         //and draw the selected antenna diagram in the canvas
-        freqOptions(select);
+        freqOptions(select);                                    //change input options to match antenna type, but only if an antenna has been selected.
     } else {                     
         //Write a message in the canvas if a frequency is entered before an antenna is selected
         
@@ -89,8 +75,8 @@ function antennaLengthCalc(){
 
         case "Dipole": {
 
-            const freq = onlyNumbers("mono"); //only allow numbers and "." in the frequency text field
-
+            const freq = document.getElementById("mono").value; /*onlyNumbers("mono");*/ //only allow numbers and "." in the frequency text field
+            
             drawAntenna(antenna, dipoleRed, dipoleBlue); //draw initial diagram of the antenna
 
             if (freq.length !== 0) {  //calculate antenna length and draw the antenna graphic in canvas
@@ -115,11 +101,11 @@ function antennaLengthCalc(){
 
         case "Fan Dipole": {
 
-            const freq1 = onlyNumbers("fan1"); //get three frequencies from input fields
+            const freq1 = document.getElementById("fan1").value; //get three frequencies from input fields
 
-            const freq2 = onlyNumbers("fan2");
+            const freq2 = document.getElementById("fan2").value;
 
-            const freq3 = onlyNumbers("fan3");
+            const freq3 = document.getElementById("fan3").value;
 
             let length = [0, 0, 0];
 
@@ -192,7 +178,7 @@ function antennaLengthCalc(){
 
         case "Inverted Vee": {
 
-            const freq = onlyNumbers("mono");  //get the desired frequency from the text field
+            const freq = document.getElementById("mono").value;  //get the desired frequency from the text field
 
             drawAntenna(antenna, invertedVeeRed, invertedVeeBlue);
 
@@ -248,7 +234,7 @@ function antennaLengthCalc(){
             
         case "Vertical": {
 
-            const freq = onlyNumbers("mono");  //get the desired frequency from the text field
+            const freq = document.getElementById("mono").value;  //get the desired frequency from the text field
 
             drawAntenna(antenna, verticalRed, groundBlue);
 
