@@ -2,13 +2,26 @@ html{
     font-size: 10px;
 }
 
-.main {
-    font-family: 'Roboto', sans-serif;
-    font-size: 1.6rem;
-    max-width: 120rem;
-    margin: auto;
-    background-color: #889696;
+@media screen and (max-width: 1000px ){
+    .main {
+        font-family: 'Roboto', sans-serif;
+        font-size: 1.6rem;
+        max-width: 70rem;
+        margin: auto;
+        background-color: #889696;
+    }
 }
+
+@media screen and (min-width: 1001px ){
+    .main {
+        font-family: 'Roboto', sans-serif;
+        font-size: 1.6rem;
+        max-width: 120rem;
+        margin: auto;
+        background-color: #889696;
+    }
+}
+
 
 .title {
     height: 7rem;
@@ -32,11 +45,23 @@ html{
     background-color: #E0E2DB;
 }
 
+@media screen and (max-width: 1000px ){
+    .antennaType {
+        display: flex;
+        flex-direction: column;
+        border-style: solid;
+        
+        /*margin: 0 10rem 2.5rem 10rem;*/
+    }
+}
+
+@media screen and (min-width: 1001px ){
 .antennaType {
     display: inline-flex;
     flex-direction: column;
+    align-items: flex-start;
     margin: 0 0 2.5rem 2rem;
-    text-align: left;
+    }
 }
 
 .frequencyField {
@@ -46,6 +71,8 @@ html{
 
 .antennaImg {
    margin-bottom: 1rem;
+   align-self: flex-start;
+   margin: 0 auto 0 auto;
 }
 
 .freqInput {
