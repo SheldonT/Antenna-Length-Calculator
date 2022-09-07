@@ -2,7 +2,7 @@ html{
     font-size: 10px;
 }
 
-@media screen and (max-width: 400px ){
+@media screen and (max-width: 1100px ){
     .main {
         font-family: 'Roboto', sans-serif;
         font-size: 1.6rem;
@@ -12,7 +12,7 @@ html{
     }
 }
 
-@media screen and (min-width: 401px ){
+@media screen and (min-width: 1101px ){
     .main {
         font-family: 'Roboto', sans-serif;
         font-size: 1.6rem;
@@ -45,17 +45,15 @@ html{
     background-color: #E0E2DB;
 }
 
-@media screen and (max-width: 400px ){
+@media screen and (max-width: 1100px ){
     .antennaType {
         display: flex;
         flex-direction: column;
-        border-style: solid;
-        
         /*margin: 0 10rem 2.5rem 10rem;*/
     }
 }
 
-@media screen and (min-width: 401px ){
+@media screen and (min-width: 1101px ){
 .antennaType {
     display: inline-flex;
     flex-direction: column;
