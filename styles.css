@@ -35,8 +35,6 @@ html{
 .antennaType {
     display: inline-flex;
     flex-direction: column;
-    margin-left: 2.5rem;
-    margin-bottom: 2rem;
     margin: 0 0 2.5rem 2rem;
     text-align: left;
 }
@@ -66,4 +64,14 @@ html{
 .tripleFreq{
     display: none;
     text-align: left;
+}
+
+.drawAntenna{
+    display: flex;
+    margin: 0 auto 0 auto;
+}
+
+.test{
+    overflow: hidden;
+    margin: 0 auto 0 auto;
 }
